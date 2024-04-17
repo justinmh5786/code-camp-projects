@@ -1,4 +1,4 @@
-git--
+--
 -- PostgreSQL database dump
 --
 
@@ -126,7 +126,9 @@ CREATE TABLE public.moon (
     has_atmosphere boolean NOT NULL,
     distance_earth_km integer,
     possible_life boolean,
-    diameter_km integer
+    diameter_km integer,
+    galaxy text,
+    planet_id integer
 );
 
 
@@ -165,7 +167,9 @@ CREATE TABLE public.planet (
     number_moons integer,
     has_atmosphere boolean,
     habitable boolean,
-    distance_earth_km numeric(15,3)
+    distance_earth_km numeric(15,3),
+    home_star text,
+    star_id integer
 );
 
 
@@ -203,7 +207,8 @@ CREATE TABLE public.star (
     lys_from_sun integer,
     star_age_billions numeric(4,1),
     radius_km integer,
-    star_type text
+    star_type text,
+    galaxy_id integer
 );
 
 
@@ -293,54 +298,57 @@ INSERT INTO public.galaxy VALUES (6, 'Sculptor', 90000, 6, true);
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.moon VALUES (1, 'The Moon', true, 384400, false, 3475);
-INSERT INTO public.moon VALUES (2, 'Deimos', false, 23460, false, 12);
-INSERT INTO public.moon VALUES (3, 'Phobos', false, 9270, false, 22);
-INSERT INTO public.moon VALUES (4, 'Callisto', true, 1883000, true, 4800);
-INSERT INTO public.moon VALUES (5, 'Europa', true, 670900, true, 3126);
-INSERT INTO public.moon VALUES (6, 'Ganymede', true, 1070000, true, 3126);
-INSERT INTO public.moon VALUES (7, 'Io', true, 421600, false, 3629);
-INSERT INTO public.moon VALUES (8, 'Titan', true, 1221850, true, 5150);
-INSERT INTO public.moon VALUES (9, 'Dione', false, 377400, false, 1120);
-INSERT INTO public.moon VALUES (10, 'Enceladus', true, 238020, true, 498);
-INSERT INTO public.moon VALUES (11, 'Calypso', false, 294660, false, 34);
-INSERT INTO public.moon VALUES (12, 'Cordelia', false, 49750, false, 26);
-INSERT INTO public.moon VALUES (13, 'Cressida', false, 61770, false, 62);
-INSERT INTO public.moon VALUES (14, 'Oberon', true, 582600, false, 1526);
-INSERT INTO public.moon VALUES (15, 'Proteus', false, 117600, false, 420);
-INSERT INTO public.moon VALUES (16, 'Charon', false, 19571, false, 1207);
-INSERT INTO public.moon VALUES (17, 'Nix', false, 48675, false, 44);
-INSERT INTO public.moon VALUES (18, 'Hydra', false, 64780, false, 44);
+INSERT INTO public.moon VALUES (1, 'The Moon', true, 384400, false, 3475, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (2, 'Deimos', false, 23460, false, 12, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (3, 'Phobos', false, 9270, false, 22, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (4, 'Callisto', true, 1883000, true, 4800, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (5, 'Europa', true, 670900, true, 3126, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (6, 'Ganymede', true, 1070000, true, 3126, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (7, 'Io', true, 421600, false, 3629, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (8, 'Titan', true, 1221850, true, 5150, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (9, 'Dione', false, 377400, false, 1120, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (10, 'Enceladus', true, 238020, true, 498, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (11, 'Calypso', false, 294660, false, 34, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (12, 'Cordelia', false, 49750, false, 26, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (13, 'Cressida', false, 61770, false, 62, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (14, 'Oberon', true, 582600, false, 1526, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (15, 'Proteus', false, 117600, false, 420, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (16, 'Charon', false, 19571, false, 1207, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (17, 'Nix', false, 48675, false, 44, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (18, 'Hydra', false, 64780, false, 44, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (19, 'Chaldene', false, 23179, false, 741, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (20, 'Isonone', false, 23217, false, 712, 'Milky Way', 2);
+INSERT INTO public.moon VALUES (21, 'Kore', false, 2454300, false, 700, 'Milky Way', 2);
 
 
 --
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.planet VALUES (1, 'Mercury', false, NULL, false, false, 77000000.000);
-INSERT INTO public.planet VALUES (2, 'Venus', false, NULL, true, false, 38000000.000);
-INSERT INTO public.planet VALUES (3, 'Earth', true, 1, true, true, NULL);
-INSERT INTO public.planet VALUES (4, 'Mars', true, 2, true, false, 225000000.000);
-INSERT INTO public.planet VALUES (5, 'Jupiter', true, 90, true, false, 714000000.000);
-INSERT INTO public.planet VALUES (6, 'Saturn', true, 146, true, false, 1300000000.000);
-INSERT INTO public.planet VALUES (7, 'Uranus', true, 28, true, false, 2600000000.000);
-INSERT INTO public.planet VALUES (8, 'Neptune', true, 14, true, false, 4300000000.000);
-INSERT INTO public.planet VALUES (9, 'Pluto', true, 5, false, false, 5200000000.000);
-INSERT INTO public.planet VALUES (10, 'Ceres', false, NULL, true, false, 380000000.000);
-INSERT INTO public.planet VALUES (11, 'Haumea', true, 2, false, false, 7300000000.000);
-INSERT INTO public.planet VALUES (12, 'Eris', true, 1, false, false, 14460000000.000);
+INSERT INTO public.planet VALUES (1, 'Mercury', false, NULL, false, false, 77000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (2, 'Venus', false, NULL, true, false, 38000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (3, 'Earth', true, 1, true, true, NULL, 'Sol', 1);
+INSERT INTO public.planet VALUES (4, 'Mars', true, 2, true, false, 225000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (5, 'Jupiter', true, 90, true, false, 714000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (6, 'Saturn', true, 146, true, false, 1300000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (7, 'Uranus', true, 28, true, false, 2600000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (8, 'Neptune', true, 14, true, false, 4300000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (9, 'Pluto', true, 5, false, false, 5200000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (10, 'Ceres', false, NULL, true, false, 380000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (11, 'Haumea', true, 2, false, false, 7300000000.000, 'Sol', 1);
+INSERT INTO public.planet VALUES (12, 'Eris', true, 1, false, false, 14460000000.000, 'Sol', 1);
 
 
 --
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.star VALUES (1, 'Sol', NULL, 4.5, 696000, 'Yellow Dwarf');
-INSERT INTO public.star VALUES (2, 'Betelgeuse', 650, 10.1, 617000000, 'Red Supergiant');
-INSERT INTO public.star VALUES (3, 'Proxima Centauri', 4, 4.8, 7500000, 'Red Dwarf');
-INSERT INTO public.star VALUES (4, 'Barnards', 6, 10.1, 136600, 'Red Dwarf');
-INSERT INTO public.star VALUES (5, 'Sirius A', 9, 1.0, 1200000, 'White main sequence binary');
-INSERT INTO public.star VALUES (6, 'Tau Ceti', 12, 10.1, 551690, 'Solitary G-class');
+INSERT INTO public.star VALUES (1, 'Sol', NULL, 4.5, 696000, 'Yellow Dwarf', 1);
+INSERT INTO public.star VALUES (2, 'Betelgeuse', 650, 10.1, 617000000, 'Red Supergiant', 1);
+INSERT INTO public.star VALUES (3, 'Proxima Centauri', 4, 4.8, 7500000, 'Red Dwarf', 1);
+INSERT INTO public.star VALUES (4, 'Barnards', 6, 10.1, 136600, 'Red Dwarf', 1);
+INSERT INTO public.star VALUES (5, 'Sirius A', 9, 1.0, 1200000, 'White main sequence binary', 1);
+INSERT INTO public.star VALUES (6, 'Tau Ceti', 12, 10.1, 551690, 'Solitary G-class', 1);
 
 
 --
@@ -361,7 +369,7 @@ SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 6, true);
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 18, true);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 21, true);
 
 
 --
@@ -459,11 +467,27 @@ ALTER TABLE ONLY public.star
 
 
 --
--- Name: star star_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: moon moon_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_planet_id_fkey FOREIGN KEY (planet_id) REFERENCES public.planet(planet_id);
+
+
+--
+-- Name: planet planet_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_star_id_fkey FOREIGN KEY (star_id) REFERENCES public.star(star_id);
+
+
+--
+-- Name: star star_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.star
-    ADD CONSTRAINT star_star_id_fkey FOREIGN KEY (star_id) REFERENCES public.galaxy(galaxy_id);
+    ADD CONSTRAINT star_galaxy_id_fkey FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
 
 
 --
